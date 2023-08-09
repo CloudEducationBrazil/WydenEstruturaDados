@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int maximoElementoVetor(int n, int v[]);
+
+int main(void){
+  int tamVetor;
+  
+  printf("Digite Tamanho do Vetor: "); 
+  scanf("%d", &tamVetor);
+
+  int v[tamVetor];
+  
+  for ( int x =0; x < tamVetor; x++ ){
+     printf("Digite elemento do Vetor[%d]: ", x);
+	 scanf("%d", &v[x]);
+  }
+     
+   printf("Resultado => %d", maximoElementoVetor(tamVetor, v));
+}
+
+int maximoElementoVetor(int n, int v[])
+{ 
+   if (n == 1)
+      return v[0];
+   else {
+      int x;
+      x = maximoElementoVetor(n-1, v);
+      // x é o máximo Elemento do Vetor de v[0..n-2] 
+      if (x > v[n-1]) return x;
+      else return v[n-1]; 
+   }
+}

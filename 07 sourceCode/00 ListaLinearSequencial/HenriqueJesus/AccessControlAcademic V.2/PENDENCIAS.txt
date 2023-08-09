@@ -1,0 +1,19 @@
+User types
+	* admin
+	* super
+	* porteiro
+
+dataRef
+	* criacao user
+	* registro acesso
+
+Create new user
+Gerenciar acessos 
+	* aluno
+		- se existir informar motivo
+	* visitante
+		- informar nome e motivo
+readArqUser
+readArqAlunos
+
+Falha ao abrir o programa o programa a partir da segunda vez

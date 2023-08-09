@@ -1,0 +1,379 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+/**
+	* @author Raique Carvalho Queiroz - Eng Computação - 162030146
+	* @content Lista Sequencial
+	* @language C
+	* @date 2019 February
+*/
+
+/* 	//NOTA//
+	SE O PROJETO FOR RODAR NO ONLINEGBD AS FUNCOES "SYSTEM()" NAO FUNCIONARAO!
+*/
+
+#define MAX 5
+
+typedef int TIPOCHAVE;
+
+typedef struct{
+    TIPOCHAVE chave;
+} REGISTRO;
+
+typedef struct{
+    REGISTRO vetor[MAX];
+    int nroElem;
+} LISTA;
+
+void criarLista(LISTA *lista);
+void reiniciarLista(LISTA *lista);
+
+void inserirFinal(LISTA *lista, REGISTRO registro);
+void inserirPosicao(LISTA *lista, REGISTRO registro, int posicao);
+void inserirInicio(LISTA *lista, REGISTRO registro);
+
+void imprimirTamanho(LISTA lista);
+void imprimirPosicao(LISTA *lista, int posicao);
+void imprimirElemento(LISTA *lista, TIPOCHAVE chave);
+void imprimirListaInicioFim(LISTA *lista);
+void imprimirListaFimInicio(LISTA *lista);
+
+void deletarPosicao(LISTA *lista, int posicao);
+
+int main(){
+	
+    LISTA lista;
+    REGISTRO registro;
+    TIPOCHAVE chave;
+    int opc, posicao, opcAux;
+    opc=0;
+    
+    do{
+		system("cls");
+    	printf("Seja bem vindo ao Menu!\n");
+   		printf("Selecione uma das opcoes abaixo:\n\n");
+   		printf("1 - Criar Estrutura\n");
+		printf("9 - Sair\n");		
+    	printf("Opcao: ");
+    	scanf("%d",&opc);
+    	switch(opc){
+    	    case 1:{
+    	    	criarLista(&lista);
+				break;
+			}
+			case 9:{
+				exit(1);
+				break;
+			}
+			default:{
+    	        system("cls");
+    	        printf("Opcao Invalida!\nVoce Voltara ao Menu!\n");
+    	        system("pause");
+    	        break;
+    	    }
+		}
+	}while(opc!=1);
+			
+	do{
+        system("cls");
+    	printf("Seja bem vindo ao Menu!\n");
+   		printf("Selecione uma das opcoes abaixo:\n\n");
+    	printf("1 - Quantidade de Registros Validos\n");
+    	printf("2 - Exibir Registros\n");
+    	printf("3 - Buscar\n");
+    	printf("4 - Inserir Registro\n");
+    	printf("5 - Excluir Registro\n");
+    	printf("6 - Reinicializar a Estrutura\n");
+    	printf("9 - Sair\n");
+    	printf("Opcao: ");
+    	scanf("%d",&opc);
+    	switch(opc){
+    	    case 1:{
+    	            imprimirTamanho(lista);
+    	            break;
+    	        }
+    	    case 2:{
+    	       	system("cls");
+    	        printf("Selecione uma das opcoes abaixo: \n\n");
+    	        printf("1 - Exibir do Inicio ao Fim\n");
+    	        printf("2 - Exibir do Fim ao Inicio\n");
+    	        printf("Opcao: ");
+    	    	scanf("%d",&opcAux);
+    	    	system("cls");
+    	    	switch(opcAux){
+    	    		case 1:{
+    	    			imprimirListaInicioFim(&lista);
+						break;
+					}
+					case 2:{
+						imprimirListaFimInicio(&lista);
+						break;
+					}
+					default:{
+						printf("Opcao Invalida!\nVoce Voltara ao Menu!\n");
+						system("pause");
+						break;
+					}
+				}
+				break;
+			}
+			case 3:{
+				system("cls");
+    	       	printf("Selecione uma das opcoes abaixo: \n\n");
+    	       	printf("1 - Buscar por Chave\n");
+    	       	printf("2 - Buscar por Posicao\n");
+    	       	printf("Opcao: ");
+    	    	scanf("%d",&opcAux);
+    	    	system("cls");
+    	    	switch(opcAux){
+    	    		case 1:{
+						printf("Informe a Chave do Registro que deseja Buscar: ");
+						scanf("%d",&chave);
+						imprimirElemento(&lista,chave);
+						break;
+					}
+					case 2:{
+						printf("Informe a Posicao do Registro que deseja Buscar: ");
+    	    			scanf("%d",&posicao);
+    	    			imprimirPosicao(&lista,posicao);
+						break;
+					}
+					default:{
+						printf("Opcao Invalida!\nVoce Voltara ao Menu!\n");
+						system("pause");
+						break;
+					}
+				}
+				break;
+			}
+			case 4:{
+				system("cls");
+    	       	printf("Selecione uma das opcoes abaixo: \n\n");
+    	       	printf("1 - Inserir no Inicio\n");
+    	       	printf("2 - Inserir no Fim\n");
+    	       	printf("3 - Inserir por Posicao\n");
+    	       	printf("Opcao: ");
+    	    	scanf("%d",&opcAux);
+    	    	system("cls");
+    	    	switch(opcAux){
+    	    		case 1:{
+    	    			printf("Informe a Chave do Registro: ");
+    	    			scanf("%d",&registro.chave);
+    	    			inserirInicio(&lista,registro);
+						break;
+					}
+					case 2:{
+    	    			printf("Informe a Chave do Registro: ");
+    	    			scanf("%d",&registro.chave);
+						inserirFinal(&lista,registro);
+						break;
+					}
+					case 3:{
+    	    			printf("Informe a Chave do Registro: ");
+    	    			scanf("%d",&registro.chave);
+						printf("Informe a Posicao: ");
+						scanf("%d",&posicao);
+						inserirPosicao(&lista,registro,posicao);
+						break;
+					}
+					default:{
+						printf("Opcao Invalida!\nVoce Voltara ao Menu!\n");
+						system("pause");
+						break;
+					}
+				}
+				break;
+			}
+			case 5:{
+				system("cls");
+				printf("Informe a Posicao do Registro: ");
+				scanf("%d",&posicao);
+				deletarPosicao(&lista,posicao);
+				break;
+			}
+			case 6:{
+				reiniciarLista(&lista);
+				break;
+			}
+			case 9:{
+				exit(1);
+				break;
+			}
+    	    default:{
+				system("cls");
+				printf("Opcao Invalida!\nVoce Voltara ao Menu!\n");
+				system("pause");
+				break;
+			}
+		}
+	}while(opc!=9);
+    return 0;
+}
+
+void criarLista(LISTA *lista){
+    lista->nroElem = 0;
+    system("cls");
+    printf("Sucesso!\n");
+    system("pause");
+}
+
+void reiniciarLista(LISTA *lista){
+	int opc;
+	system("cls");
+	printf("Voce tem certeza que deseja Reiniciar a Estrurua?\n");
+	printf("0 - SIM\n");
+	printf("1 - NAO\n");
+    printf("Opcao: ");
+    scanf("%d",&opc);
+    system("cls");
+    switch(opc){
+    	case 0:{
+    		lista->nroElem = 0;
+    		printf("Sucesso!\n");
+			break;
+		}case 1:{
+			printf("Voce voltara ao Menu!\n");
+			break;
+		}
+		default:{
+			printf("Opcao Invalida!\nVoce Voltara ao Menu!\n");
+			break;
+		}
+	}
+
+    system("pause");
+}
+
+int verificaChave(LISTA *lista, REGISTRO registro){
+	int i;
+	for(i=0;i<lista->nroElem;i++)
+		if(registro.chave==lista->vetor[i].chave)
+			return 1;
+	return 0;
+}
+
+void inserirFinal(LISTA *lista, REGISTRO registro){
+	int verificador = verificaChave(lista,registro);
+	system("cls");
+	if(verificador==0){
+		if(lista->nroElem<MAX){
+	    	lista->vetor[lista->nroElem] = registro;
+    		lista->nroElem = lista->nroElem+1;
+    		printf("Sucesso!\n");
+		}else{
+			printf("Erro!\n");		
+			printf("Lista Cheia!\n");
+		}
+	}else{
+		printf("Erro!\n");
+		printf("Chave de Registro ja inserida na lista!\n");
+	}
+	system("pause");
+}
+
+void inserirPosicao(LISTA *lista, REGISTRO registro, int posicao){
+	int i;
+	int verificador = verificaChave(lista,registro);
+	if(verificador==0){
+    	if(posicao>=lista->nroElem)
+        	inserirFinal(lista,registro);
+    	else{
+    		system("cls");
+    		if(lista->nroElem<MAX){
+    			printf("Sucesso!\n");
+        		for(i=lista->nroElem;i>posicao;i--)
+            		lista->vetor[i] = lista->vetor[i-1];
+        		lista->vetor[posicao] = registro;
+        		lista->nroElem++;
+    		}else{
+				printf("Erro!\n");		
+				printf("Lista Cheia!\n");
+			}
+			system("pause");
+    	}
+    }else{
+    	system("cls");
+		printf("Erro!\n");
+		printf("Chave de Registro ja inserida na lista!\n");
+		system("pause");
+	}
+}
+
+void inserirInicio(LISTA *lista, REGISTRO registro){
+    inserirPosicao(lista,registro,0);
+}
+
+void imprimirTamanho(LISTA lista){
+	system("cls");
+	if(lista.nroElem==0)
+		printf("Lista Vazia!\n");
+	else
+    	printf("Quantidade: %d\n",lista.nroElem);
+    system("pause");
+}
+
+void imprimirPosicao(LISTA *lista, int posicao){
+	system("cls");
+    if(posicao<lista->nroElem)
+        printf("O Registro da posicao %d: %d\n",posicao,lista->vetor[posicao].chave);
+    else
+        printf("Posicao nao existe na lista!\n");
+    system("pause");
+}
+
+void imprimirElemento(LISTA *lista, TIPOCHAVE chave){
+	int i=0, verifica=0;
+	system("cls");
+	for(i=0;i<lista->nroElem;i++){
+		if(chave==lista->vetor[i].chave){
+			printf("Registro foi encontrado na posicao: %d\n");
+			verifica=1;
+		}
+	}
+	if(verifica==0)
+		printf("Registro nao encontrado na lista!\n");
+	system("pause");
+}
+
+void imprimirListaInicioFim(LISTA *lista){
+	int i;
+	if(lista->nroElem==0)
+		printf("Lista Vazia!\n");
+	else{
+	    printf("Registros: (POSICAO - REGISTRO)\n");
+    	for(i=0; i<lista->nroElem;i++)
+        	printf("%d - %d\n",i,lista->vetor[i].chave);
+	}
+	system("pause");
+}
+
+void imprimirListaFimInicio(LISTA *lista){
+	int i;
+	if(lista->nroElem==0)
+		printf("Lista Vazia!\n");
+	else{
+	    printf("Registros: (POSICAO - REGISTRO)\n");
+    	for(i=lista->nroElem-1;i>=0;i--)
+        	printf("%d - %d\n",i,lista->vetor[i].chave);
+	}	
+	system("pause");
+}
+
+void deletarPosicao(LISTA *lista, int posicao){
+	int i = 0;
+	system("cls");
+	if(posicao<lista->nroElem){
+		printf("Sucesso!\n");
+		if(posicao==(lista->nroElem-1))
+			lista->nroElem = lista->nroElem-1;
+		else{
+			for(i=posicao;i<lista->nroElem-1;i++)
+				lista->vetor[i] = lista->vetor[i+1];
+			lista->nroElem = lista->nroElem-1;
+		}
+	}else
+		printf("Posicao nao existe!\n");
+	system("pause");
+}
+

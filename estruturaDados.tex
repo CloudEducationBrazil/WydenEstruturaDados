@@ -1,0 +1,382 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{WydenArea1EstruturaDados}
+\author{Heleno Cardoso}
+\date{February 2019}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+http://maratona.ime.usp.br/
+
+https://www.questoesestrategicas.com.br/questoes/busca?filtros=%23disciplina%3Dalgoritmos-e-estrutura-de-dados%23assunto%3Darvores%23nMostrarResolvidas%3Don%23nMostrarResolvidasQE%3Don%23nMostrarAnul%3Don%23nMostrarDesat%3Don
+
+-- Técnicas de Algoritmos
+
+Algoritmos:
+
+1. Força Bruta
+2. Pesquisa Exaustiva
+3. Dividir e Conquistar
+4. Gulosos
+5. Backtracking (retrocesso)
+6. Programação Dinâmica
+
+-- backtracking
+
+https://sites.google.com/site/seminariobacktracking/material-de-apoio
+
+é um algoritmo baseado em estrutura de dados, tem como meta resolver o problema no menor intervalo de tempo, não levando em consideração o esforço para alcançar a solução, usando recursividade.
+
+Backtracking é um algoritmo genérico que busca, por força bruta, soluções possíveis para problemas computacionais (tipicamente problemas de satisfações à restrições).
+
+De maneira incremental, busca por candidatos à soluções e abandona cada candidato parcial C quando C não pode resultar em uma solução válida.
+
+Backtracking é um tipo de algoritmo que representa um refinamento da busca por força bruta, em que múltiplas soluções podem ser eliminadas sem serem explicitamente examinadas. O termo foi cunhado pelo matemático estado-unidense D. H. Lehmer na década de 1950.
+
+Backtracking é aplicável na solução de vários problemas conhecidos, dentre os quais podem-se destacar:
+
+Exemplos de Problemas:
+1. N-Rainhas - https://www.youtube.com/watch?v=ckC2hFdLff0
+2. Passeio do cavalo
+3. Labirinto 
+4. Caixeiro Viajante 
+5. Entrevista com o usuário (revisar os eventos)
+6. Sala de aula (passos)
+7. Sudoku (uma grade de 9 x 9 (matriz de 81 posições) https://www.youtube.com/watch?v=pd9awN2xBqw
+8. Resta 1
+9. Cubo Mágico
+10. 08 Damas - https://pt.wikipedia.org/wiki/Problema_das_oito_damas
+11. Outros - https://www.youtube.com/watch?v=xI2VP5sAx3c
+
+Backtracking é aplicável na solução de vários problemas conhecidos, dentre os quais podem-se destacar:
+
+Backtracking é um algoritmo genérico que busca, por força bruta, soluções possíveis para problemas computacionais (tipicamente problemas de satisfações à restrições).
+
+De maneira incremental, busca por candidatos à soluções e abandona cada candidato parcial C quando C não pode resultar em uma solução válida.
+Quando sua busca chega a uma extremidade da estrutura de dados, como um nó terminal de uma árvore, o algoritmo realiza um retrocesso tipicamente implementado através de uma recursão.
+inserir a descrição da imagem aqui
+
+Exemplo de Algoritmo
+
+bool acabou = FALSE;
+
+backtrack(int a[], int k, int n) {
+    int c[MAXCANDIDATOS];  /* Candidatos para a próxima posição */
+    int ncandidatos;       /* Número de candidatos para a próxima posição */
+    int i;                 /* Contador */
+
+    if (e_uma_solucao(a, k, n)) {
+        processar_solucao(a, k, n);
+    } else {
+        k = k + 1;
+        construir_candidatos(a, k, n, c, &ncandidatos);
+        for (i=0; i<ncandidatos; i++) {
+            a[k] = c[i];
+            backtrack(a, k, n);
+            if (acabou) return;
+        }
+    }
+}
+
+https://www.youtube.com/watch?v=F7NRc2VEiYw
+
+*** Arvore
+http://www.ufjf.br/jairo_souza/files/2009/12/EDI-06.ED_.Arvores.pdf
+
+https://www.vivaolinux.com.br/artigo/Linguagem-C-Arvores-Binarias
+
+https://pt.wikibooks.org/wiki/Algoritmos_e_Estruturas_de_Dados/%C3%81rvore
+
+https://s3.amazonaws.com/ead_casa/ead_casa/ead_casa/CursoSecaoItem/apostila-banco-do-brasil-parte-18-escriturario-informatica-marcio-hunecke.pdf
+
+https://inf.ufes.br/~pdcosta/ensino/2012-1-estruturas-de-dados/slides/Aula15%20%28arvores%29.pdf
+
+http://www.macoratti.net/16/05/vbn_arvbin.htm
+
+http://webserver2.tecgraf.puc-rio.br/eda/EDA_01_ArvBinBusca.pdf
+
+*****
+
+1. https://pt.wikibooks.org/wiki/Algoritmos_e_Estruturas_de_Dados/%C3%81rvore
+
+2.
+https://inf.ufes.br/~pdcosta/ensino/2012-1-estruturas-de-dados/slides/Aula15%20%28arvores%29.pdf
+
+3.
+http://www.ufjf.br/jairo_souza/files/2009/12/EDI-06.ED_.Arvores.pdf
+
+*****************
+
+https://pt.wikibooks.org/wiki/Eletr%C3%B4nica_Digital/Sistemas_de_Numera%C3%A7%C3%A3o
+https://br.answers.yahoo.com/question/index?qid=20101022190046AAHrrit
+https://pt.wikipedia.org/wiki/Sistema_de_numera%C3%A7%C3%A3o_hexadecimal
+
+8,375 em HEXA
+Adriano Galvão OK Respoats Hexa
+Michel Carvalho ???
+
+ttps://realtimelogic.com/products/json/
+http://www.digip.org/jansson/
+
+struct Compra
+{   float preco;
+    Compra *proxima;
+};
+
+struct Cliente
+{   char nome[20];
+    Compra *compras;
+};
+
+-- LER VARIAVEIS STRINGS
+https://www.cprogressivo.net/2013/03/Lendro-e-Escrevendo-Strings-em-C.html
+
+-- Leitura e Gravação de Arquivos
+https://www.inf.pucrs.br/~pinho/LaproI/Arquivos/Arquivos.htm
+
+https://www.questoesestrategicas.com.br/questoes/busca/assunto/filas?pagina=3
+
+https://www.qconcursos.com/questoes-de-concursos/questoes/47cf7569-95
+
+-- ponteiro
+https://www.cprogressivo.net/2014/01/Apostila-de-C-Ponteiro-Vetor-Matriz-String.html
+
+https://www.gabaritou.com.br/Questao/Index?page=1&pageSize=10&AreaConhecimentoID=8&DisciplinaID=1&AssuntoID=191&searchOpt=2
+
+-- Ponteiros
+https://www.inf.pucrs.br/~pinho/PRGSWB/Ponteiros/ponteiros.html#Impressao_de_Ponteiros
+
+Linguagem C imperativa e estruturada. Ela permite de forma explícita a alocação e desalocação de memória, gerenciamento de ponteiros e estruturas 
+Método de Ensino por Indução - Apresentar o erro no algoritmo para que o aluno aprenda a identificar o erro e a corrigi-lo. 
+
+- Criando estruturas simples para guardar informações...
+
+0. modelar as estruturas
+modelar estruturas; Instanciar e acessar dados e modificá-los
+1. instanciar
+3. criar os algoritmos que gerenciam as estruturas
+
+Gerenciamento das Estruturas de Dados
+0. Criação do objeto ( inicialização ) - variável de controle TOP
+1. busca
+2. inserção - push
+3. exclusão - pop
+4. tamanho do objeto - contagem do número de elementos do objeto
+
+Limpar a tela
+printf("\e[H\e[2J")
+system("clear || cls");
+
+https://pt.wikibooks.org/wiki/Algoritmos_e_Estruturas_de_Dados
+https://pt.wikibooks.org/wiki/Algoritmos_e_Estruturas_de_Dados/Filas
+
+https://www.youtube.com/watch?v=pMpNzndqzkM
+https://www.youtube.com/watch?v=0BDMqra4D94
+https://www.youtube.com/watch?v=fNP1GHLLKuY
+
+Lista ligada ou Lista encadeada é uma estrutura de dados linear e dinâmica. Ela é composta por uma sequência de nodos ou células que contém seus dados e também uma ou duas referências ("links") que apontam para o nodo anterior ou posterior. Há diversos modelos de lista ligadas como lista-encadeada simples, listas duplamente ligadas e listas encadeadas circulares.
+
+0. Vetor, Matrizes
+1. Lista
+2. Pilha
+3. Deque
+4. Fila
+5. Busca Binária
+6. Árvore
+7. Grafos
+
+http://www.each.usp.br/digiampietri/ed/
+http://www.each.usp.br/digiampietri/ed/aula14.pdf
+
+Curso Virtual - Estrutura Estática Pilha 
+
+Obs: Inserção e exclusão no topo da pilha
+     busca de trás pra frente
+     inicialização -1, tamanho fixo [Arranjo]
+     variável TOP para controlar a pilha
+     método push - inserção na pilha
+     método pop - exclusão na pilha
+     criar tipos de dados TRUE e FALSE - typedef
+     criar typedef struct - estrutura pilha
+     
+Nota: sizeof eh um operador - retorna a quantidade de bytes em memória alocada pelo objeto, definido pelo malloc (alocador de qdt em bytes de memória)
+
+Curso Virtual
+     
+- Aula 01 - Implementação Estrutura de Dados Introdução
+https://www.youtube.com/watch?v=y0B-vQI6Tiw&t=30s
+
+- Aula 02 - Implementação Estrutura de Dados Criação de uma Estrutura
+https://www.youtube.com/watch?v=x2DwllnUZDg
+
+- Aula 03 - Implementação Estrutura de Dados Lista Linear Sequencial
+https://www.youtube.com/watch?v=g_nbG7L5ou0
+
+- Aula 04 - Implementação Estrutura de Dados Lista Linear Sequencial Continuação
+https://www.youtube.com/watch?v=iBoWPFDQC_I
+
+- Aula 05 - Implementação Estrutura de Dados 
+https://www.youtube.com/watch?v=OE3CtV2bGqo&list=PLxI8Can9yAHf8k8LrUePyj0y3lLpigGcl&index=6&t=0s
+
+- Aula 06 - Implementação Estrutura de Dados Lista Ligada - Implementação Dinâmica
+https://www.youtube.com/watch?v=C6WOW0L1XO4
+
+- Aula 07 - Implementação Estrutura de Dados Lista Ligada Circular com nó na Cabeça - Implementação Dinâmica
+https://www.youtube.com/watch?v=bxwIm3F6aaQ
+
+- Aula 08 - Implementação Estrutura Estática Pilha 
+https://www.youtube.com/watch?v=ruOzUIA4rbs
+
+Obs: Inserção e exclusão no topo da pilha
+     busca de trás pra frente
+     inicialização -1, tamanho fixo [Arranjo]
+     variável TOP para controlar a pilha
+     método push - inserção na pilha
+     método pop - exclusão na pilha
+     criar tipos de dados TRUE e FALSE - typedef
+     criar typedef struct - estrutura pilha
+     
+     Ex.: Pilha de papéis e pratos
+
+- Aula 09 - Implementação Estrutura Dinâmica Pilha 
+https://www.youtube.com/watch?v=iphqkUNXxek
+
+- Aula 10 - Implementação Estrutura Dinâmica DEQUE 
+https://www.youtube.com/watch?v=LawD4fYlEVo
+
+- Aula 11 - Implementação Estrutura Estática FILA 
+https://www.youtube.com/watch?v=rIzGHX6ai70
+
+Ex.: Fila de Banco
+
+- Aula 12 - Implementação Estrutura Dinâmica FILA 
+https://www.youtube.com/watch?v=tdRx2UeXBK4
+
+- Aula 13 - Implementação Estrutura Estática Duas PILHAS 
+https://www.youtube.com/watch?v=YVvSYat-eqE
+
+- Aula 14 - Implementação Estrutura Matriz Esparsa 
+https://www.youtube.com/watch?v=C_ePgrEbLs0
+
+- Aula 15 - Implementação Estrutura Árvore - Conceitos 
+https://www.youtube.com/watch?v=eiMMtyRBYCE
+
+-- MUITO BOM - ANIMAÇÃO
+https://www.cs.usfca.edu/~galles/visualization/Algorithms.html
+
+http://www.each.usp.br/digiampietri/ACH2023/
+
+- Aula 16 - Implementação Estrutura Árvore Binária de Pesquisa (ABP)
+            Inicialização, Inserção de Elementos
+https://www.youtube.com/watch?v=7IKXYhqipK8
+
+- Aula 17 - Implementação Estrutura ÁBP - Busca, Contagem e Impressão da Árvore
+https://www.youtube.com/watch?v=O4AqgoO42pc
+
+- Aula 18 - Implementação Estrutura ÁBP - Remoção de Elementos
+https://www.youtube.com/watch?v=3koM42vL6js
+
+- Aula 19 - Implementação Estrutura Árvore N-árias
+https://www.youtube.com/watch?v=cbOtqNKNZHw
+
+- Aula 20 - Implementação Estrutura ÁBP
+https://www.youtube.com/watch?v=4L6_5-92JGI&list=PLxI8Can9yAHf8k8LrUePyj0y3lLpigGcl&index=21&t=0s
+
+- Aula 21 - Implementação Estrutura Árvore AVL 
+https://www.youtube.com/watch?v=YkF76cOgtMQ
+
+- Aula 22 - Implementação Estrutura ÁBP
+https://www.youtube.com/watch?v=NUNe0Mp1MVI&list=PLxI8Can9yAHf8k8LrUePyj0y3lLpigGcl&index=22
+
+- Aula 23 - Grafos - Conceitos Básicos
+https://www.youtube.com/watch?v=MC0u4f334mI
+
+- Aula 24 - Grafos - Representação
+https://www.youtube.com/watch?v=9m8wDGYWlXA
+
+- Aula 25 - Grafos - Conceitos Básicos
+https://www.youtube.com/watch?v=1bNHNG0s7ug
+
+- Aula 26 - Grafos - Busca em Profundidade
+https://www.youtube.com/watch?v=doH9o1sO-Cw&list=PLxI8Can9yAHf8k8LrUePyj0y3lLpigGcl&index=26
+
+- Aula 27 - Grafos - Busca em Largura
+https://www.youtube.com/watch?v=9J3Sz6K--8c&list=PLxI8Can9yAHf8k8LrUePyj0y3lLpigGcl&index=27
+
+- Aula 28 - Grafos - Algoritmos de Dijkstra
+https://www.youtube.com/watch?v=ovkITlgyJ2s&list=PLxI8Can9yAHf8k8LrUePyj0y3lLpigGcl&index=28
+
+Aula 01
+1. Material Tipos de Dados
+2. Ponteiros - https://www.youtube.com/watch?v=naNqY-3Tha4
+-- Material Ponteiro
+https://pt.slideshare.net/adrianots/ponteiros-8559438
+
+Aula 02
+
+Explicar recursividade
+Material 
+
+http://www.professorisidro.com.br/curso/estruturas-de-dados/
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1.7]{universe}
+\caption{The Universe}
+\label{fig:universe}
+\end{figure}
+
+\section{Conclusion}
+``I always thought something was fundamentally wrong with the universe'' \citep{adams1995hitchhiker}
+
+************ OK 
+void fImprime(int num) {
+    printf("%d ", 11 - num);
+    if ( num != 1) 
+      fImprime(num-1);
+}
+
+int main()
+{   fImprime(10);
+    return 0;
+}
+
+******** Fatorial
+
+int fFatorial(int num) {
+    if ( num == 0) return 1;
+    else return num * fFatorial(num - 1);
+}
+
+int main()
+{   int numero;
+    scanf("%i",&numero);
+    if ( numero >=0 )
+	  printf("%d", fFatorial(numero));
+	else
+	  printf("Fatorial não existe");
+    return 0;
+}
+
+*** Somatorio de 2 ate 100 dos pares
+int fSomatorio(int num) {
+    if ( num == 0) return 0;
+	 return num + fSomatorio(num - 2);
+}
+
+int main()
+{  	printf("%d", fSomatorio(10));
+    return 0;
+}
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

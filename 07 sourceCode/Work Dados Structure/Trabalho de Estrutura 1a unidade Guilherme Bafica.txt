@@ -1,0 +1,692 @@
+   BOA NOITE PROFESSOR, O PORTAL ACEITA APENAS UM ARQUIVO, ENTAO
+COLOCAREI TODOS OS PROGRAMAS AQUI COM ALGUMAS ANOTAÇÕES.
+ESPERO QUE NÃO FIQUE TÃO RUIM PARA O SENHOR.
+
+
+
+
+
+==== PROGRAMA PORTARIA.c ==== 
+Neste programa eu uso a leitura de um arquivo .txt pra simular
+o login por cartao de acesso. Colocarei o mais em baixo tambem
+para que o senhor crie o arquivo e consiga executar esta forma
+de login no programa.
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+      void logo1(){
+        printf("    -===========================================================================-\n\n");
+        printf("        *****    ******   *****   **********   ******   *****      *   *******\n");
+        printf("        *    *   *    *   *    *      *        *    *   *    *     *   *     *\n");
+        printf("        *****    *    *   *****       *        *    *   *****      *   *     *\n");
+        printf("        *        *    *   * *         *        ******   * *        *   *******\n");
+        printf("        *        *    *   *   *       *        *    *   *   *      *   *     *\n");
+        printf("        *        *    *   *    *      *        *    *   *    *     *   *     *\n");
+        printf("        *        ******   *     *     *        *    *   *     *    *   *     *\n");
+        printf("    -===========================================================================-\n\n");
+      }
+
+      void logando(){
+        printf("LOGANDO.\n");
+        printf("[----------]\n");
+        printf("|=         |\n");
+        printf("[----------]\n");
+        for(int i = 0; i <= 500000000; i++){}
+        system("cls");
+        printf("LOGANDO..\n");
+        printf("[----------]\n");
+        printf("|====      |\n");
+        printf("[----------]\n");
+        for(int i = 0; i <= 500000000; i++){}
+        system("cls");
+        printf("LOGANDO...\n");
+        printf("[----------]\n");
+        printf("|=======   |\n");
+        printf("[----------]\n");
+        for(int i = 0; i <= 500000000; i++){}
+        system("cls");
+        printf("LOGADO!\n");
+        printf("[----------]\n");
+        printf("|==========|\n");
+        printf("[----------]\n");
+        for(int i = 0; i <= 500000000; i++){}
+        system("cls");
+      }
+
+      void liberaaluno(){
+        FILE *arq;
+        char nome[100];
+
+        arq = fopen("alunos_liberados.txt", "w");
+
+        if(arq){
+          printf("Informe o Nome e Matricula do aluno:\n");
+          printf("\n[0] - VOLTAR\n");
+          fgets(nome, 100, stdin);
+          while (nome[0] != '0'){
+            fputs(nome, arq);
+            fgets(nome, 100, stdin);
+          }
+
+        }else{
+          printf("Nao foi possivel criar o arquivo!!!");
+        }
+
+        fclose(arq);
+      }
+
+      void principl(){
+        int opt = 0;
+
+      do {
+        printf("[1] - Liberar aluno.\n");
+        printf("[0] - Sair.\n");
+        printf("Opcao: ");
+
+        scanf("%d", &opt);
+
+        switch (opt) {
+          case 1:
+            liberaaluno();
+            break;
+          default:
+            system("cls");
+            printf("\nInforme uma opcao valida!\n\n");
+        }
+
+      } while(opt != 0);
+          system("cls");
+      }
+
+
+  int main(){
+    int op_porteiro = 0, senha;
+    char login[20], c;
+    FILE *ca;
+    struct tm *info;
+    int login2;
+    int senha2;
+
+    time_t tempobruto;
+    time(&tempobruto);
+    info =  localtime(&tempobruto);
+
+
+    logo1();
+
+    do{
+
+      printf("Informe o metodo de acesso: \n");
+      printf("[1] - Cartao Porteiro.\n");
+      printf("[2] - Login e senha.\n");
+      printf("[0] - Sair.\n");
+      printf("Opcao: ");
+      scanf("%d", &op_porteiro);
+
+      switch (op_porteiro) {
+        case 1:
+	//Simular um a leitura e login com um cartao de acesso
+          ca = fopen("cartaoacesso.txt", "r");
+          if(ca){
+            system("cls");
+
+            logando();
+
+            printf("Nome Porteiro: ");
+            while((c = getc(ca)) != EOF){
+            printf("%c", c);
+            }
+            printf("%s", asctime(info));
+
+           principl();
+
+        }else{
+          printf("Insira o Cartao de Acesso.");
+        }
+            fclose(ca);
+            exit(1);
+          break;
+        case 2:
+          printf("Informe seu Login e Senha\n");
+          printf("\nLogin: ");
+          scanf("%d", &login2);
+          printf("Senha: ");
+          scanf("%d", &senha2);
+
+          ca = fopen("cartaoacesso.txt", "r");
+          if(ca){
+            system("cls");
+
+            logando();
+
+            printf("Nome Porteiro: ");
+            while((c = getc(ca)) != EOF){
+            printf("%c", c);
+            }
+          }
+            printf("%s", asctime(info));
+
+           principl();
+
+            exit(1);
+          break;
+
+        default:
+          system("cls");
+          logo1();
+          printf("DIGITE UMA OPCAO VALIDA:\n\n");
+          break;
+      }
+  }while(op_porteiro != 0);
+    system("cls");
+    logo1();
+
+    return 0;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==== cartaoacesso.txt ==== //"Cria um arquivo .txt com o este nome ao lado e com os dados a baixo"
+Fulaninho de Tal - Campus Area 1 Paralela
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==== PROGRAMA AGENDA.c ====
+
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<time.h>
+
+
+        void logo(){
+          printf("\n -=================================================================-\n\n");
+          printf("        ******   ******   ******   *******   ***       ******      \n");
+          printf("        *    *   *        *        *     *   *    *    *    *      \n");
+          printf("        *    *   *        *        *     *   *     *   *    *      \n");
+          printf("        ******   *  ***   *****    *     *   *     *   ******      \n");
+          printf("        *    *   *    *   *        *     *   *    *    *    *      \n");
+          printf("        *    *   *    *   *        *     *   *   *     *    *      \n");
+          printf("        *    *   ******   ******   *     *   ***       *    *      \n");
+          printf("\n -=================================================================-\n");
+        }
+
+        void calendario(){
+          struct tm *info;
+
+          time_t tempobruto;
+          time(&tempobruto);
+          info =  localtime(&tempobruto);
+
+          printf("\n");
+          printf("     ******   ******   *        *******   ******   ***       ******   *****     *    ******   \n");
+          printf("     *        *    *   *        *         *    *   *    *    *    *   *    *    *    *    *   \n");
+          printf("     *        *    *   *        *         *    *   *     *   *    *   ****      *    *    *   \n");
+          printf("     *        ******   *        ******    *    *   *     *   ******   *   *     *    *    *   \n");
+          printf("     *        *    *   *        *         *    *   *    *    *    *   *     *   *    *    *   \n");
+          printf("     ******   *    *   ******   *******   *    *   ***       *    *   *     *   *    ******  \n\n\n ");
+
+
+
+
+            printf("\n            ==- JANEIRO -==                                      ==- FEVEREIRO -== \n");
+            printf("-------------------------------------------         -------------------------------------------");
+            printf("\n |SEG   TER   QUA   QUI   SEX   SAB   DOM|           |SEG   TER   QUA   QUI   SEX   SAB   DOM|\n");
+            printf("\n |       1     2     3     4     5     6 |           |                         1     2     3 |\n");
+            printf("\n | 7     8     9     10    11    12    13|           | 4     5     6      7    8     9     10|\n");
+            printf("\n | 14    15    16    17    18    19    20|           | 11    12    13    14    15    16    17|\n");
+            printf("\n | 21    22    23    24    25    26    27|           | 18    19    20    21    22    23    24|\n");
+            printf("\n | 28    29    30    31                  |           | 25    26    27    28                  |\n");
+            printf("-------------------------------------------         -------------------------------------------\n\n\n");
+
+            printf("\n            ==- MARCO -==                                        ==- ABRIL -== \n");
+            printf("-------------------------------------------         -------------------------------------------");
+            printf("\n |SEG   TER   QUA   QUI   SEX   SAB   DOM|           |SEG   TER   QUA   QUI   SEX   SAB   DOM|\n");
+            printf("\n |                         1     2     3 |           | 1     2     3     4     5     6     7 |\n");
+            printf("\n | 4     5     6     7     8     9     10|           | 8     9     10    11    12    13    14|\n");
+            printf("\n | 11    12    13    14    15    16    17|           | 15    16    17    18    19    20    21|\n");
+            printf("\n | 18    19    20    21    22    23    24|           | 22    23    24    25    26    27    28|\n");
+            printf("\n | 25    26    27    28    29    30    31|           | 29    30                              |\n");
+            printf("-------------------------------------------         -------------------------------------------\n\n\n");
+
+            printf("\n            ==- MAIO -==                                         ==- JUNHO -== \n");
+            printf("-------------------------------------------         -------------------------------------------");
+            printf("\n |SEG   TER   QUA   QUI   SEX   SAB   DOM|           |SEG   TER   QUA   QUI   SEX   SAB   DOM|\n");
+            printf("\n |             1     2     3     4     5 |           |                               1     2 |\n");
+            printf("\n | 6     7     8     9     10    11    12|           | 3     4     5     6     7     8     9 |\n");
+            printf("\n | 13    14    15    16    17    18    19|           | 10    11    12    13    14    15    16|\n");
+            printf("\n | 20    21    22    23    24    25    26|           | 17    18    19    20    21    22    23|\n");
+            printf("\n | 27    28    29    30    31            |           | 24    25    26    27    28    29    30|\n");
+            printf("-------------------------------------------         -------------------------------------------\n\n\n");
+
+            printf("\n            ==- JULHO -==                                       ==- AGOSTO -== \n");
+            printf("-------------------------------------------         -------------------------------------------");
+            printf("\n |SEG   TER   QUA   QUI   SEX   SAB   DOM|           |SEG   TER   QUA   QUI   SEX   SAB   DOM|\n");
+            printf("\n | 1     2     3     4     5     6     7 |           |                   1     2     3     4 |\n");
+            printf("\n | 8     9     10    11    12    13    14|           | 5     6     7     8     9     10    11|\n");
+            printf("\n | 15    16    17    18    19    20    21|           | 12    13    14    15    16    17    18|\n");
+            printf("\n | 22    23    24    25    26    27    28|           | 19    20    21    21    23    24    25|\n");
+            printf("\n | 29    30    31                        |           | 26    27    28    29    30    31      |\n");
+            printf("-------------------------------------------         -------------------------------------------\n\n\n");
+
+            printf("\n            ==- SETEMBRO -==                                      ==- OUTUBRO -== \n");
+            printf("-------------------------------------------         -------------------------------------------");
+            printf("\n |SEG   TER   QUA   QUI   SEX   SAB   DOM|           |SEG   TER   QUA   QUI   SEX   SAB   DOM|\n");
+            printf("\n |                                     1 |           |       1     2     3     4     5     6 |\n");
+            printf("\n | 2     3     4     5     6     7     8 |           | 7     8     9     10    11    12    13|\n");
+            printf("\n | 9     10    11    12    13    14    15|           | 14    15    16    17    18    19    20|\n");
+            printf("\n | 16    17    18    19    20    21    22|           | 21    22    23    24    25    26    27|\n");
+            printf("\n | 23    24    25    26    27    28    29|           | 28    29    30    31                  |\n");
+            printf("\n | 30                                               --------------------------------------------\n");
+            printf("------------------------------------------- \n\n\n");
+
+            printf("\n            ==- NOVEMBRO -==                                      ==- DEZEMBRO -== \n");
+            printf("-------------------------------------------         -------------------------------------------");
+            printf("\n |SEG   TER   QUA   QUI   SEX   SAB   DOM|           |SEG   TER   QUA   QUI   SEX   SAB   DOM|\n");
+            printf("\n |                         1     2     3 |           |                                     1 |\n");
+            printf("\n | 4     5     6     7     8     9     10|           | 2     3     4     5     6     7     8 |\n");
+            printf("\n | 11    12    13    14    15    16    17|           | 9     10    11    12    13    14    15|\n");
+            printf("\n | 18    19    20    21    22    23    24|           | 16    17    18    19    20    21    22|\n");
+            printf("\n | 25    26    27    28    29    30      |           | 23    24    25    26    27    28    29|\n");
+            printf("-------------------------------------------            | 30    31                              |\n");
+            printf("                                                  ------------------------------------------\n\n");
+            printf("                                                                     %s\n", asctime(info));
+        }
+
+        void agendar(){
+
+          int mes;
+          int dia1 = 0, dia2 = 0, dia3 = 0, dia4 = 0, dia5 = 0, dia6 = 0, dia7 = 0, dia8 = 0, dia9 = 0, dia10 = 0, dia11 = 0, dia12 = 0;
+          char jan[150] = {"SEM COMPROMISSO"};
+          char fev[150] = {"SEM COMPROMISSO"};
+          char mar[150] = {"SEM COMPROMISSO"};
+          char abr[150] = {"SEM COMPROMISSO"};
+          char mai[150] = {"SEM COMPROMISSO"};
+          char jun[150] = {"SEM COMPROMISSO"};
+          char jul[150] = {"SEM COMPROMISSO"};
+          char ago[150] = {"SEM COMPROMISSO"};
+          char set[150] = {"SEM COMPROMISSO"};
+          char out[150] = {"SEM COMPROMISSO"};
+          char nov[150] = {"SEM COMPROMISSO"};
+          char dez[150] = {"SEM COMPROMISSO"};
+
+        do{
+          printf("Selecione o MES e DIA para anotacao: \n");
+          printf("\n [1] - JANEIRO\n [2] - FEVEREIRO\n [3] - MARCO\n [4] - ABRIL\n [5] - MAIO\n [6] - JUNHO\n");
+          printf(" [7] - JULHO\n [8] - AGOSTO\n [9] - SETEMBRO\n [10] - OUTUBRO\n [11] - NOVEMBRO\n [12] - DEZEMBRO\n");
+          printf("\n [0] - SAIR \n");
+          printf("\n [15] - Exibir Compromissos \n");
+          scanf("%d", &mes);
+
+
+
+          switch (mes) {
+            case 1:
+              printf("\n ==-JANEIRO-== \n");
+              printf("\nDia: ");
+              scanf("%d", &dia1);
+              fflush(stdin);
+              printf("\nAnotacao: ");
+              gets(jan);
+              break;
+            case 2:
+              printf("\n ==-Fevereiro-== .\n");
+              printf("\nDia: ");
+              scanf("%d", &dia2);
+              fflush(stdin);
+              printf("\nAnotacao: ");
+              gets(fev);
+              break;
+            case 3:
+              printf("\n ==-MARCO-== \n");
+              printf("\nDia: ");
+              scanf("%d", &dia3);
+              fflush(stdin);
+              printf("\nAnotacao: ");
+              gets(mar);
+              break;
+            case 4:
+              printf("\n ==-ABRIL-== \n");
+              printf("\nDia: ");
+              scanf("%d", &dia4);
+              fflush(stdin);
+              printf("\nAnotacao: ");
+              gets(abr);
+              break;
+            case 5:
+              printf("\n ==-MAIO-== \n");
+              printf("\nDia: ");
+              scanf("%d", &dia5);
+              fflush(stdin);
+              printf("\nAnotacao: ");
+              gets(mai);
+              break;
+            case 6:
+              printf("\n ==-JUNHO-== \n");
+              printf("\nDia: ");
+              scanf("%d", &dia6);
+              fflush(stdin);
+              printf("\nAnotacao: ");
+              gets(jun);
+              break;
+            case 7:
+              printf("\n ==-JULHO-== \n");
+              printf("\nDia: ");
+              scanf("%d", &dia7);
+              fflush(stdin);
+              printf("\nAnotacao: ");
+              gets(jul);
+              break;
+            case 8:
+              printf("\n ==-AGOSTO-== \n");
+              printf("\nDia: ");
+              scanf("%d", &dia8);
+              printf("\nAnotacao: ");
+              gets(ago);
+              break;
+            case 9:
+              printf("\n ==-SETEMBRO-== \n");
+              printf("\nDia: ");
+              scanf("%d", &dia9);
+              fflush(stdin);
+              printf("\nAnotacao: ");
+              gets(set);
+              break;
+            case 10:
+              printf("\n ==-OUTUBRO-== \n");
+              printf("\nDia: ");
+              scanf("%d", &dia10);
+              fflush(stdin);
+              printf("\nAnotacao: ");
+              gets(out);
+              break;
+            case 11:
+              printf("\n ==-NOVEMBRO-== \n");
+              printf("\nDia: ");
+              scanf("%d", &dia11);
+              fflush(stdin);
+              printf("\nAnotacao: ");
+              gets(nov);
+              break;
+            case 12:
+              printf("\n ==-DEZEMBRO-== \n");
+              printf("\nDia: ");
+              scanf("%d", &dia12);
+              fflush(stdin);
+              printf("\nAnotacao: ");
+              gets(dez);
+              break;
+
+            case 15:
+              system("cls");
+              printf("\n  ~~~~COMPROMISSOS~~~~\n\n");
+              printf("JANEIRO -> Dia %d, %s\n\n", dia1, jan);
+              printf("FAVEREIRO -> Dia %d, %s\n\n", dia2, fev);
+              printf("MARCO -> Dia %d, %s\n\n", dia3, mar);
+              printf("ABRIL -> Dia %d, %s\n\n", dia4, abr);
+              printf("MAIO -> Dia %d, %s\n\n", dia5, mai);
+              printf("JUNHO -> Dia %d, %s\n\n", dia6, jun);
+              printf("JULHO -> Dia %d, %s\n\n", dia7, jul);
+              printf("AGOSTO -> Dia %d, %s\n\n", dia8, ago);
+              printf("SETEMBRO -> Dia %d, %s\n\n", dia9, set);
+              printf("OUTUBRO -> Dia %d, %s\n\n", dia10, out);
+              printf("NOVEMBRO -> Dia %d, %s\n\n", dia11, nov);
+              printf("DEZEMBRO -> Dia %d, %s\n\n", dia12, dez);
+              printf("\n\n\n");
+              break;
+
+            default:
+              system("cls");
+              printf("\n Opcao invalida. \n");
+              break;
+          }
+        }while(mes !=0);
+          system("cls");
+
+        }
+
+        void menu(){
+          int op_menu;
+
+          do{
+
+          printf("Informe a opcao desejada:\n");
+          printf("[1] - CALENDARIO.\n\n");
+          printf("[2] - BLOCO DE ANOTACOES.\n\n");
+          printf("[0] - SAIR.\n");
+          scanf("%d", &op_menu);
+
+          switch (op_menu) {
+            case 1:
+              system("cls");
+              calendario();
+              break;
+            case 2:
+              system("cls");
+              printf("\nESCOLHEU ANOTACOES\n");
+              agendar();
+              break;
+            default:
+            system("cls");
+            printf("\nSelecione uma opcao valida\n");
+
+          }
+
+        }while (op_menu != 0);
+          system("cls");
+          exit(1);
+
+        }
+
+
+
+
+
+
+
+  int main(){
+
+    logo();
+
+    menu();
+
+    return 0;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==== PROGRAMA INCLUSAO INTEIROS.c ====
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct st_no{
+	int valor;
+	struct st_no *prox;
+};
+
+typedef struct st_no no;
+
+
+          int vazia(no *le){
+          	if(le->prox == NULL){
+          		return 1;
+          	}else{
+          		return 0;
+          	}
+          }
+
+          void inicia(no *le){
+          	le->prox = NULL;
+          }
+
+          void libera(no *le){
+          	if(!vazia(le)){
+          		no *proxNo, *atual;
+          		atual = le->prox;
+          		while(atual != NULL){
+          			proxNo = atual->prox;
+          			free(atual);
+          			atual = proxNo;
+          		}
+          	}
+          }
+
+          void exibe(no *le){
+          	if(vazia(le)){
+          		printf("Lista esta vazia!\n\n");
+          		return;
+          	}
+          	no *tmp;
+          	tmp = le->prox;
+
+          	while(tmp != NULL){
+          		printf("%d ", tmp->valor);
+          		tmp = tmp->prox;
+          	}
+          	printf("\n\n");
+          }
+
+          void insereInicio(no *le){
+          	no *novo = (no*)malloc(sizeof(no));
+          	if(!novo){
+          		printf("Sem memoria disponivel!\n");
+          		exit(1);
+          	}
+          	printf("Informe o valor: ");
+          	scanf("%d", &novo->valor);
+
+          	no *oldHead = le->prox;
+
+          	le->prox = novo;
+          	novo->prox = oldHead;
+          }
+
+          void insereFim(no *le){
+          	no *novo = (no*)malloc(sizeof(no));
+          	if(!novo){
+          		printf("Sem memoria disponível!\n");
+          		exit(1);
+          	}
+          	printf("Informe o valor: ");
+          	scanf("%d", &novo->valor);
+          	novo->prox = NULL;
+
+          	if(vazia(le)){
+          		le->prox = novo;
+          	}else{
+          		no *tmp = le->prox;
+
+          		while(tmp->prox != NULL){
+          			tmp = tmp->prox;
+          		}
+          		tmp->prox = novo;
+          	}
+          }
+
+          void opcao(no *le, int op){
+          	switch(op){
+          		case 0:
+          			libera(le);
+          			break;
+          		case 1:
+          			exibe(le);
+          			break;
+          		case 2:
+          			insereInicio(le);
+          			break;
+          		case 3:
+          			insereFim(le);
+          			break;
+          		case 4:
+          			inicia(le);
+          			break;
+          		default:
+          			printf("Comando inválido\n\n");
+
+          	}
+          }
+
+					int menu(){
+	int opt;
+
+	printf("Escolha a opcao: \n");
+
+	printf("[1] - Exibir: \n");
+	printf("[2] - Adicionar no inicio: \n");
+	printf("[3] - Adicioanr no fim: \n");
+	printf("[4] - Zerar lista: \n");
+  printf("[0] - Sair: \n");
+	printf("Opcao: ");
+	scanf("%d", &opt);
+
+	return opt;
+}
+
+
+
+int main(){
+	no *le = (no*)malloc(sizeof(no));
+
+	if(!le){
+		printf("Sem memoria disponível: ");
+		exit(1);
+	}
+	inicia(le);
+	int opt;
+
+	do{
+		opt=menu();
+		opcao(le, opt);
+	}while(opt);
+	free(le);
+	return 0;
+}
