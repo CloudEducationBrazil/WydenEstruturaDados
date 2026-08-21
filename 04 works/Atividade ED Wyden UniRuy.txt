@@ -1,0 +1,42 @@
+Vocês utilizam uma pilha e outras EDs todos os dias. Onde?
+
+Exemplos:
+
+CTRL + Z → Pilha
+Navegador → Pilha
+Pastas → Árvore
+Banco SQL → B-tree
+Playlist → Lista
+Impressora → Fila
+GPS → Grafo
+Ranking de jogo → Heap
+Histórico → Lista/Pilha
+Busca rápida → Hash
+
+Aplicações ED
+
+Sistema/Aplicação	Estruturas de Dados presentes
+Windows	árvores, filas, listas, tabelas hash
+Linux	listas encadeadas, árvores, filas, hash tables
+Banco SQL	B-tree, hash, árvores balanceadas
+Word	pilhas, árvores, listas
+Navegador	pilhas, árvores, tabelas hash
+Player de música	listas, filas, hash
+Jogos	grafos, árvores, filas, heaps
+GPS/Maps	grafos, filas de prioridade
+Sistema operacional	filas, listas, árvores, heaps
+Compiladores	pilhas, árvores
+WhatsApp/Mensageiros	filas, hash, árvores
+Inteligência Artificial	árvores, grafos, filas de prioridade
+
+=========================================================================================
+
+Atividade ED - Desafio:
+
+Escolham uma situação real — não necessariamente comercial — em que uma Estrutura de Dados seja fundamental para o funcionamento da solução.
+
+Onde existe uma pilha no Windows?
+Onde uma árvore aparece no Linux?
+Como o Spotify organiza músicas?
+Por que um banco de dados usa B-tree?
+
