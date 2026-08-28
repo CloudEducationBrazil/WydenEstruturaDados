@@ -1,3 +1,7 @@
+
+Engenharia de Software: sair da aplicação comercial/CRUD e focar em softwares funcionais, simuladores, analisadores e problemas computacionais.
+Estrutura de Dados: partir de situações reais do cotidiano e desenvolver uma solução onde a ED seja o elemento central, com implementação, demonstração e análise.
+
 Vocês utilizam uma pilha e outras EDs todos os dias. Onde?
 
 Exemplos:
