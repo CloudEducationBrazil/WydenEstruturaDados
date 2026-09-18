@@ -1,0 +1,23 @@
+Lista simplesmente ligada
+        ↓
+Lista simplesmente ligada ordenada
+        ↓
+Lista circular
+        ↓
+Lista duplamente ligada
+        ↓
+Deque
+
+SIMPLES
+   |
+   |  adiciona anterior
+   v
+DUPLA
+   |
+   |  conecta último ao primeiro
+   v
+CIRCULAR
+   |
+   |  operações nas duas extremidades
+   v
+DEQUE

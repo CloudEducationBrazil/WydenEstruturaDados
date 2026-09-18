@@ -1,0 +1,558 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/*
+ * ============================================================
+ * LISTA LIGADA - IMPLEMENTAÇÃO DINÂMICA
+ * ============================================================
+ */
+
+/* Tipo booleano */
+typedef int bool;
+
+#define true  1
+#define false 0
+
+/* Tipo da chave armazenada no registro */
+typedef int TIPOCHAVE;
+
+
+/*
+ * ============================================================
+ * REGISTRO
+ * ============================================================
+ */
+typedef struct {
+    TIPOCHAVE chave;
+    /* outros campos podem ser adicionados aqui */
+} REGISTRO;
+
+
+/*
+ * ============================================================
+ * ELEMENTO
+ *
+ * Cada elemento possui:
+ *   - um registro
+ *   - um ponteiro para o próximo elemento
+ * ============================================================
+ */
+typedef struct tempRegistro {
+    REGISTRO reg;
+    struct tempRegistro* prox;
+} ELEMENTO;
+
+
+/*
+ * PONT é um ponteiro para ELEMENTO
+ */
+typedef ELEMENTO* PONT;
+
+
+/*
+ * ============================================================
+ * LISTA
+ *
+ * A lista possui apenas um ponteiro para o primeiro elemento.
+ * ============================================================
+ */
+typedef struct {
+    PONT cabeca;
+} LISTA;
+
+
+/*
+ * ============================================================
+ * INICIALIZAR LISTA
+ * ============================================================
+ */
+void inicializarLista(LISTA* lista)
+{
+    lista->cabeca = NULL;
+}
+
+
+/*
+ * ============================================================
+ * RETORNAR A QUANTIDADE DE ELEMENTOS
+ * ============================================================
+ */
+int tamanhoLista(LISTA* lista)
+{
+    int quantidade = 0;
+    PONT atual = lista->cabeca;
+
+    while (atual != NULL)
+    {
+        quantidade++;
+
+        atual = atual->prox;
+    }
+
+    return quantidade;
+}
+
+
+/*
+ * ============================================================
+ * EXIBIR ELEMENTOS DA LISTA
+ * ============================================================
+ */
+void exibirLista(LISTA* lista)
+{
+    PONT atual = lista->cabeca;
+
+    if (atual == NULL)
+    {
+        printf("\nLista vazia!\n");
+        return;
+    }
+
+    printf("\nLista: ");
+
+    while (atual != NULL)
+    {
+        printf("%d", atual->reg.chave);
+
+        if (atual->prox != NULL)
+            printf(" -> ");
+
+        atual = atual->prox;
+    }
+
+    printf(" -> NULL\n");
+}
+
+
+/*
+ * ============================================================
+ * BUSCAR ELEMENTO
+ *
+ * Retorna o endereço do elemento encontrado.
+ * Caso não encontre, retorna NULL.
+ * ============================================================
+ */
+PONT buscarElemento(LISTA* lista, TIPOCHAVE chave)
+{
+    PONT atual = lista->cabeca;
+
+    while (atual != NULL)
+    {
+        if (atual->reg.chave == chave)
+        {
+            return atual;
+        }
+
+        atual = atual->prox;
+    }
+
+    return NULL;
+}
+
+
+/*
+ * ============================================================
+ * INSERIR ELEMENTO NO INÍCIO DA LISTA
+ *
+ * A memória para o novo elemento é obtida dinamicamente
+ * através de malloc().
+ * ============================================================
+ */
+bool inserirInicio(LISTA* lista, TIPOCHAVE chave)
+{
+    PONT novo;
+
+    /*
+     * Alocação dinâmica de memória
+     */
+    novo = (PONT) malloc(sizeof(ELEMENTO));
+
+    /*
+     * Verifica se a alocação foi realizada
+     */
+    if (novo == NULL)
+    {
+        return false;
+    }
+
+    /*
+     * Preenche o registro
+     */
+    novo->reg.chave = chave;
+
+    /*
+     * O próximo elemento será o atual primeiro elemento
+     */
+    novo->prox = lista->cabeca;
+
+    /*
+     * O novo elemento passa a ser o primeiro
+     */
+    lista->cabeca = novo;
+
+    return true;
+}
+
+bool inserirFinal(LISTA* lista, TIPOCHAVE chave)
+{
+    PONT novo;
+    PONT atual;
+
+    novo = (PONT) malloc(sizeof(ELEMENTO));
+
+    if (novo == NULL)
+    {
+        return false;
+    }
+
+    novo->reg.chave = chave;
+    novo->prox = NULL;
+
+    /*
+     * Lista vazia:
+     * o novo elemento será o primeiro.
+     */
+    if (lista->cabeca == NULL)
+    {
+        lista->cabeca = novo;
+    }
+    else
+    {
+        /*
+         * Percorre até o último elemento.
+         */
+        atual = lista->cabeca;
+
+        while (atual->prox != NULL)
+        {
+            atual = atual->prox;
+        }
+
+        /*
+         * O último passa a apontar para o novo.
+         */
+        atual->prox = novo;
+    }
+
+    return true;
+}
+
+/*
+ * ============================================================
+ * EXCLUIR ELEMENTO
+ *
+ * Procura o elemento pela chave e remove o primeiro elemento
+ * encontrado.
+ * ============================================================
+ */
+bool excluirElemento(LISTA* lista, TIPOCHAVE chave)
+{
+    PONT atual;
+    PONT anterior;
+
+    atual = lista->cabeca;
+    anterior = NULL;
+
+    while (atual != NULL)
+    {
+        /*
+         * Elemento encontrado
+         */
+        if (atual->reg.chave == chave)
+        {
+            /*
+             * Caso o elemento seja o primeiro da lista
+             */
+            if (anterior == NULL)
+            {
+                lista->cabeca = atual->prox;
+            }
+            else
+            {
+                /*
+                 * Caso o elemento esteja no meio ou
+                 * no final da lista
+                 */
+                anterior->prox = atual->prox;
+            }
+
+            /*
+             * Libera a memória alocada para o elemento
+             */
+            free(atual);
+
+            return true;
+        }
+
+        /*
+         * Avança os ponteiros
+         */
+        anterior = atual;
+        atual = atual->prox;
+    }
+
+    /*
+     * Elemento não encontrado
+     */
+    return false;
+}
+
+/*
+ * ============================================================
+ * REINICIALIZAR LISTA
+ *
+ * Remove todos os elementos e libera toda a memória
+ * alocada dinamicamente.
+ * ============================================================
+ */
+void reinicializarLista(LISTA* lista)
+{
+    PONT atual;
+    PONT proximo;
+
+    atual = lista->cabeca;
+
+    while (atual != NULL)
+    {
+        /*
+         * Guarda o próximo elemento antes de liberar
+         * o elemento atual.
+         */
+        proximo = atual->prox;
+
+        free(atual);
+
+        atual = proximo;
+    }
+
+    /*
+     * Depois de liberar todos os elementos,
+     * a lista volta a ficar vazia.
+     */
+    lista->cabeca = NULL;
+}
+
+
+/*
+ * ============================================================
+ * MENU
+ * ============================================================
+ */
+void exibirMenu()
+{
+    printf("\n");
+    printf("============================================\n");
+    printf("       LISTA LIGADA - IMPLEMENTACAO DINAMICA\n");
+    printf("============================================\n");
+    printf("1 - Inicializar lista\n");
+    printf("2 - Quantidade de elementos\n");
+    printf("3 - Exibir elementos\n");
+    printf("4 - Buscar elemento\n");
+    printf("5 - Inserir elemento\n");
+    printf("6 - Excluir elemento\n");
+    printf("7 - Reinicializar lista\n");
+    printf("0 - Sair\n");
+    printf("============================================\n");
+    printf("Digite uma opcao: ");
+}
+
+
+/*
+ * ============================================================
+ * PROGRAMA PRINCIPAL
+ * ============================================================
+ */
+int main()
+{
+    LISTA lista;
+
+    int opcao;
+    int chave;
+    REGISTRO reg;
+
+    PONT resultado;
+
+
+    /*
+     * Inicialização da lista
+     */
+    inicializarLista(&lista);
+
+
+    /*
+     * Menu principal
+     */
+    do
+    {
+        exibirMenu();
+
+        scanf("%d", &opcao);
+
+
+        switch (opcao)
+        {
+
+            /*
+             * ------------------------------------------------
+             * 1 - INICIALIZAR
+             * ------------------------------------------------
+             */
+            case 1:
+
+                /*
+                 * Atenção:
+                 * se a lista já possuir elementos, o ideal é
+                 * reinicializá-la antes de inicializar novamente.
+                 */
+                reinicializarLista(&lista);
+
+                inicializarLista(&lista);
+
+                printf("\nLista inicializada com sucesso!\n");
+
+                break;
+
+
+            /*
+             * ------------------------------------------------
+             * 2 - QUANTIDADE
+             * ------------------------------------------------
+             */
+            case 2:
+
+                printf("\nQuantidade de elementos: %d\n",
+                       tamanhoLista(&lista));
+
+                break;
+
+
+            /*
+             * ------------------------------------------------
+             * 3 - EXIBIR
+             * ------------------------------------------------
+             */
+            case 3:
+
+                exibirLista(&lista);
+
+                break;
+
+
+            /*
+             * ------------------------------------------------
+             * 4 - BUSCAR
+             * ------------------------------------------------
+             */
+            case 4:
+
+                printf("\nDigite a chave que deseja buscar: ");
+                scanf("%d", &chave);
+
+                resultado = buscarElemento(&lista, chave);
+
+                if (resultado != NULL)
+                {
+                    printf("\nElemento encontrado!\n");
+                    printf("Chave: %d\n",
+                           resultado->reg.chave);
+                }
+                else
+                {
+                    printf("\nElemento nao encontrado!\n");
+                }
+
+                break;
+
+
+            /*
+             * ------------------------------------------------
+             * 5 - INSERIR
+             * ------------------------------------------------
+             */
+            case 5:
+
+                printf("\nDigite a chave a ser inserida: ");
+                scanf("%d", &chave);
+
+                //if (inserirInicio(&lista, chave))
+                if (inserirFinal(&lista, chave))
+                {
+                    printf("\nElemento inserido com sucesso!\n");
+                }
+                else
+                {
+                    printf("\nErro: memoria insuficiente!\n");
+                }
+
+                break;
+
+
+            /*
+             * ------------------------------------------------
+             * 6 - EXCLUIR
+             * ------------------------------------------------
+             */
+            case 6:
+
+                printf("\nDigite a chave a ser excluida: ");
+                scanf("%d", &chave);
+
+                if (excluirElemento(&lista, chave))
+                {
+                    printf("\nElemento excluido com sucesso!\n");
+                }
+                else
+                {
+                    printf("\nElemento nao encontrado!\n");
+                }
+
+                break;
+
+
+            /*
+             * ------------------------------------------------
+             * 7 - REINICIALIZAR
+             * ------------------------------------------------
+             */
+            case 7:
+
+                reinicializarLista(&lista);
+
+                printf("\nLista reinicializada com sucesso!\n");
+
+                break;
+
+
+            /*
+             * ------------------------------------------------
+             * 0 - SAIR
+             * ------------------------------------------------
+             */
+            case 0:
+
+                /*
+                 * Libera a memória antes de encerrar
+                 * o programa.
+                 */
+                reinicializarLista(&lista);
+
+                printf("\nPrograma encerrado.\n");
+
+                break;
+
+
+            /*
+             * ------------------------------------------------
+             * OPÇÃO INVÁLIDA
+             * ------------------------------------------------
+             */
+            default:
+
+                printf("\nOpcao invalida!\n");
+        }
+
+    } while (opcao != 0);
+
+
+    return 0;
+}
